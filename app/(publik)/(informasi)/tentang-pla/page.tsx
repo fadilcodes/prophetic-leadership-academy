@@ -104,7 +104,7 @@ export default async function AboutPage() {
           </div>
         </div>
       </section>
-      <Link href="/program" className="mt-8 inline-flex min-h-12 items-center rounded-lg bg-accent px-5 text-sm font-bold text-primary">Jelajahi Program</Link>
+      <Link href="/program" className="mt-8 inline-flex min-h-12 items-center rounded-lg bg-accent px-5 text-sm font-bold text-primary hover:bg-accent-hover">Jelajahi Program</Link>
     </>
   );
 }

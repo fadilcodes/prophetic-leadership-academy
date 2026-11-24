@@ -3,7 +3,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 
 export function TrackingDialog({ id, number, trackingNumber, notified }: {
   id: string; number: string; trackingNumber: string | null; notified: boolean;
@@ -11,14 +11,16 @@ export function TrackingDialog({ id, number, trackingNumber, notified }: {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [saving, setSaving] = useState(false);
+  const requestActive = useRef(false);
   const [message, setMessage] = useState("");
   const [savedWithWarning, setSavedWithWarning] = useState(false);
   const [tracking, setTracking] = useState(trackingNumber ?? "");
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (saving) return;
+    if (requestActive.current) return;
     setMessage("");
+    requestActive.current = true;
     setSaving(true);
     try {
       const response = await fetch(`/api/admin/orders/${id}/resi`, {
@@ -38,13 +40,14 @@ export function TrackingDialog({ id, number, trackingNumber, notified }: {
     } catch {
       setMessage("Resi belum dapat disimpan. Silakan coba lagi.");
     } finally {
+      requestActive.current = false;
       setSaving(false);
     }
   }
 
   return (
     <Dialog.Root open={open} onOpenChange={(value) => {
-      if (saving) return;
+      if (requestActive.current) return;
       setMessage("");
       if (value) setTracking(trackingNumber ?? "");
       else if (savedWithWarning) {
@@ -53,7 +56,7 @@ export function TrackingDialog({ id, number, trackingNumber, notified }: {
       }
       setOpen(value);
     }}>
-      <Dialog.Trigger className="inline-flex min-h-11 items-center rounded-lg border bg-card px-3 text-sm font-bold text-primary hover:bg-secondary">
+      <Dialog.Trigger className="inline-flex min-h-11 items-center rounded-lg border bg-card px-3 text-sm font-bold text-primary enabled:hover:bg-secondary">
         {trackingNumber ? notified ? "Ubah resi" : "Kirim ulang notifikasi" : "Masukkan resi"}
       </Dialog.Trigger>
       <Dialog.Portal>
@@ -68,7 +71,7 @@ export function TrackingDialog({ id, number, trackingNumber, notified }: {
           }}>
           <Dialog.Title className="pr-10 text-xl font-bold text-primary">Nomor Resi Pengiriman</Dialog.Title>
           <Dialog.Description className="mt-2 break-all text-sm text-muted-foreground">Pesanan {number}</Dialog.Description>
-          <Dialog.Close aria-label="Tutup" disabled={saving} className="absolute right-3 top-3 grid size-11 place-items-center rounded-md text-primary hover:bg-secondary">
+          <Dialog.Close aria-label="Tutup" disabled={saving} className="absolute right-3 top-3 grid size-11 place-items-center rounded-md text-primary enabled:hover:bg-secondary">
             <X size={18} aria-hidden="true" />
           </Dialog.Close>
           <form onSubmit={submit} className="mt-5 grid gap-4">
@@ -77,7 +80,7 @@ export function TrackingDialog({ id, number, trackingNumber, notified }: {
                 required maxLength={80} readOnly={saving} className="min-h-11 rounded-lg border border-input px-3 font-normal" />
             </label>
             {message && <p role="alert" className="text-sm text-destructive">{message}</p>}
-            <button disabled={saving} className="min-h-11 rounded-lg bg-accent px-4 text-sm font-bold text-accent-foreground disabled:opacity-50">
+            <button type="submit" disabled={saving} aria-busy={saving || undefined} className="min-h-11 rounded-lg bg-accent px-4 text-sm font-bold text-accent-foreground enabled:hover:bg-accent-hover">
               {saving ? "Memproses…" : "Simpan dan kirim email"}
             </button>
           </form>

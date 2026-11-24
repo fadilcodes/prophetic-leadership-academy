@@ -1,3 +1,6 @@
+import { FilterForm } from "@/components/ui/FilterForm";
+import { SubmitButton } from "@/components/ui/SubmitButton";
+
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -37,11 +40,11 @@ export default async function RegistrationsAdmin({ params, searchParams }: PageP
       <h1 className="mt-2 text-4xl">Pendaftar Program</h1>
       <p className="mt-2 font-semibold text-primary">{program.data.title}</p>
       <div className="my-5 flex flex-wrap items-end justify-between gap-3">
-        <form method="get" className="flex flex-wrap items-end gap-2">
+        <FilterForm key={exportQuery} action={path} className="flex flex-wrap items-end gap-2">
           <SelectField name="bayar" label="Status bayar" value={status} options={statusOptions(registrationStatuses)} />
           <Field name="midtrans" label="ID Midtrans" value={orderId} maxLength={50} />
-          <button className={secondaryButton}>Terapkan</button>
-        </form>
+          <SubmitButton className={secondaryButton}>Terapkan</SubmitButton>
+        </FilterForm>
         <a href={`${path}/export${exportQuery ? `?${exportQuery}` : ""}`} className={primaryButton}>Export CSV</a>
       </div>
       <AdminTable columns={["Peserta", "Kontak", "Instansi", "Status bayar", "ID Midtrans", "Tanggal daftar"]} empty={!registrations.data.length}>

@@ -10,6 +10,7 @@
   --popover: #FFFFFF;
   --popover-foreground: #1E2925;
   --primary: #073F32;
+  --primary-hover: #04271f;
   --primary-foreground: #F8F5EE;
   --secondary: #EEE9DD;
   --secondary-foreground: #073F32;
@@ -35,12 +36,14 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-border: var(--border);
@@ -63,6 +66,18 @@
   h2,
   h3 {
     @apply font-serif font-semibold text-primary;
+  }
+
+  button {
+    @apply transition-colors;
+  }
+
+  button:enabled {
+    @apply cursor-pointer;
+  }
+
+  button:disabled {
+    @apply cursor-not-allowed opacity-60;
   }
 
   :focus-visible {

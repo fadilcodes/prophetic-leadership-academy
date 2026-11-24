@@ -1,3 +1,5 @@
+import { SubmitButton } from "@/components/ui/SubmitButton";
+
 import Link from "next/link";
 
 import { deleteContent, saveUstadz, toggleUstadz } from "../actions";
@@ -33,7 +35,7 @@ export default async function UstadzAdmin({ searchParams }: PageProps<"/admin/us
               <td><div className="flex min-w-40 flex-wrap items-center gap-1">
                 <Link href={`?edit=${profile.id}&page=${page}#editor`} className={secondaryButton}>Edit</Link>
                 <form action={toggleUstadz.bind(null, profile.id, !profile.is_active)}>
-                  <button className={secondaryButton}>{profile.is_active ? "Nonaktifkan" : "Aktifkan"}</button>
+                  <SubmitButton className={secondaryButton}>{profile.is_active ? "Nonaktifkan" : "Aktifkan"}</SubmitButton>
                 </form>
                 <DeleteAction id={profile.id} action={deleteContent.bind(null, "ustadz")} />
               </div></td>

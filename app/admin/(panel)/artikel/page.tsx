@@ -1,3 +1,5 @@
+import { SubmitButton } from "@/components/ui/SubmitButton";
+
 import Link from "next/link";
 
 import { deleteContent, saveArticle, saveCategory, toggleArticle } from "../actions";
@@ -37,7 +39,7 @@ export default async function ArticlesAdmin({ searchParams }: PageProps<"/admin/
               <td><div className="flex min-w-40 flex-wrap items-center gap-1">
                 <Link href={`?edit=${article.id}&page=${page}#editor-artikel`} className={secondaryButton}>Edit</Link>
                 <form action={toggleArticle.bind(null, article.id, !article.is_published)}>
-                  <button className={secondaryButton}>{article.is_published ? "Jadikan draf" : "Terbitkan"}</button>
+                  <SubmitButton className={secondaryButton}>{article.is_published ? "Jadikan draf" : "Terbitkan"}</SubmitButton>
                 </form>
                 <DeleteAction id={article.id} action={deleteContent.bind(null, "article")} />
               </div></td>

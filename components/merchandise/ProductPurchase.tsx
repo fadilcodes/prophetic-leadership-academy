@@ -26,7 +26,7 @@ export function ProductPurchase({ product, images, illustrated }: {
   const cartQty = cart.items.filter((item) => item.productId === product.id).reduce((sum, item) => sum + item.qty, 0);
   const available = Math.max(0, Math.min(1000, product.stock - cartQty));
   const qty = Math.min(requestedQty, available);
-  const quantityButton = "grid size-11 place-items-center rounded-md text-primary hover:bg-secondary disabled:opacity-40";
+  const quantityButton = "grid size-11 place-items-center rounded-md text-primary enabled:hover:bg-secondary disabled:opacity-40";
   const addDisabled = !cart.ready || qty < 1;
 
   function purchase(checkout: boolean) {
@@ -56,7 +56,7 @@ export function ProductPurchase({ product, images, illustrated }: {
             {images.map((image, index) => (
               <button key={`${image}-${index}`} type="button" onClick={() => setPhoto(index)} aria-label={`Tampilkan foto ${index + 1}`}
                 aria-pressed={index === photo}
-                className="relative size-16 overflow-hidden rounded-lg border-2 aria-pressed:border-primary sm:size-20">
+                className="relative size-16 overflow-hidden rounded-lg border-2 hover:border-accent aria-pressed:border-primary sm:size-20">
                 <ProductImage src={image} alt="" sizes="80px" />
               </button>
             ))}
@@ -104,11 +104,11 @@ export function ProductPurchase({ product, images, illustrated }: {
           {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
           <div className="grid gap-3 sm:grid-cols-2">
             <button type="button" disabled={addDisabled} onClick={() => purchase(false)}
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-primary px-3 text-sm font-bold text-primary hover:bg-secondary disabled:opacity-45">
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-primary px-3 text-sm font-bold text-primary enabled:hover:bg-secondary disabled:opacity-45">
               <ShoppingBag size={16} aria-hidden="true" /> Tambah ke Keranjang
             </button>
             <button type="button" disabled={addDisabled} onClick={() => purchase(true)}
-              className="min-h-12 rounded-lg bg-accent px-3 text-sm font-bold text-accent-foreground disabled:opacity-45">
+              className="min-h-12 rounded-lg bg-accent px-3 text-sm font-bold text-accent-foreground enabled:hover:bg-accent-hover disabled:opacity-45">
               Beli Sekarang
             </button>
           </div>

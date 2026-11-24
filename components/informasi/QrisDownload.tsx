@@ -1,7 +1,7 @@
 "use client";
 
 import { Download } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const imageExtensions: Record<string, string> = {
   "image/png": "png",
@@ -14,10 +14,12 @@ const imageExtensions: Record<string, string> = {
 
 export function QrisDownload({ imageUrl }: { imageUrl: string | null }) {
   const [busy, setBusy] = useState(false);
+  const requestActive = useRef(false);
   const [failed, setFailed] = useState(false);
 
   async function download() {
-    if (!imageUrl || busy) return;
+    if (!imageUrl || requestActive.current) return;
+    requestActive.current = true;
     setBusy(true);
     setFailed(false);
     try {
@@ -39,6 +41,7 @@ export function QrisDownload({ imageUrl }: { imageUrl: string | null }) {
     } catch {
       setFailed(true);
     } finally {
+      requestActive.current = false;
       setBusy(false);
     }
   }
@@ -49,7 +52,8 @@ export function QrisDownload({ imageUrl }: { imageUrl: string | null }) {
         type="button"
         onClick={download}
         disabled={!imageUrl || busy}
-        className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-accent px-4 text-sm font-bold text-primary hover:bg-accent/10 disabled:cursor-not-allowed disabled:opacity-55"
+        aria-busy={busy || undefined}
+        className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-accent px-4 text-sm font-bold text-primary enabled:hover:bg-accent/10 disabled:opacity-55"
       >
         <Download aria-hidden="true" className="size-4" />
         {busy ? "Mengunduh…" : "Download Gambar QRIS"}

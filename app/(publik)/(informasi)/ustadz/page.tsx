@@ -46,7 +46,7 @@ export default async function UstadzPage() {
           <h2 className="text-2xl text-primary-foreground">Undang Pemateri</h2>
           <p className="mt-2 text-sm leading-relaxed">Ceritakan topik, audiens, dan jadwal yang Anda rencanakan.</p>
         </div>
-        <Link href="/kontak" className="inline-flex min-h-12 shrink-0 items-center rounded-lg bg-accent px-5 text-sm font-bold text-primary outline-accent">
+        <Link href="/kontak" className="inline-flex min-h-12 shrink-0 items-center rounded-lg bg-accent px-5 text-sm font-bold text-primary outline-accent hover:bg-accent-hover">
           Hubungi PLA
         </Link>
       </section>

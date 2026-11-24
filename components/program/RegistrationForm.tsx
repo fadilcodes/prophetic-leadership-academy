@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 
 const fields = [
   { name: "name", label: "Nama Lengkap", type: "text", autoComplete: "name", maxLength: 100, required: true },
@@ -13,13 +13,15 @@ export function RegistrationForm({ slug, isPaid, registrationId }: {
   slug: string; isPaid: boolean; registrationId: string;
 }) {
   const [submitting, setSubmitting] = useState(false);
+  const requestActive = useRef(false);
   const [error, setError] = useState("");
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (submitting) return;
+    if (requestActive.current) return;
     const fields = Object.fromEntries(new FormData(event.currentTarget));
     setError("");
+    requestActive.current = true;
     setSubmitting(true);
 
     try {
@@ -37,6 +39,7 @@ export function RegistrationForm({ slug, isPaid, registrationId }: {
     } catch {
       setError("Pendaftaran belum dapat diproses. Silakan coba lagi.");
     }
+    requestActive.current = false;
     setSubmitting(false);
   }
 
@@ -53,8 +56,8 @@ export function RegistrationForm({ slug, isPaid, registrationId }: {
         </label>
       ))}
       {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
-      <button type="submit" disabled={submitting}
-        className="min-h-11 rounded-lg bg-accent px-4 py-2 text-sm font-bold text-accent-foreground disabled:opacity-60">
+      <button type="submit" disabled={submitting} aria-busy={submitting || undefined}
+        className="min-h-11 rounded-lg bg-accent px-4 py-2 text-sm font-bold text-accent-foreground enabled:hover:bg-accent-hover">
         {submitting ? "Sedang memproses…" : isPaid ? "Lanjut ke pembayaran" : "Konfirmasi pendaftaran"}
       </button>
     </form>

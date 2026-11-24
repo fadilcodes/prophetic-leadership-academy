@@ -193,7 +193,7 @@ export function CheckoutForm() {
                 {activeQuote?.error && (
                   <>
                     <p className="text-destructive">{activeQuote.error}</p>
-                    <button type="button" className="min-h-11 font-bold text-primary underline" onClick={() => setAttempt((value) => value + 1)}>
+                    <button type="button" className="min-h-11 font-bold text-primary underline hover:text-primary-hover" onClick={() => setAttempt((value) => value + 1)}>
                       Coba lagi
                     </button>
                   </>
@@ -210,8 +210,8 @@ export function CheckoutForm() {
                 </div>
               </dl>
               {error && <p role="alert" className="mt-3 text-sm text-destructive">{error}</p>}
-              <button type="submit" disabled={!selected || fetchingRates || submitting}
-                className="mt-4 min-h-12 w-full rounded-lg bg-accent px-3 text-sm font-bold text-accent-foreground disabled:opacity-50">
+              <button type="submit" disabled={!selected || fetchingRates || submitting} aria-busy={submitting || undefined}
+                className="mt-4 min-h-12 w-full rounded-lg bg-accent px-3 text-sm font-bold text-accent-foreground enabled:hover:bg-accent-hover">
                 {submitting ? "Menyiapkan pembayaran…" : "Bayar dengan Midtrans"}
               </button>
             </section>

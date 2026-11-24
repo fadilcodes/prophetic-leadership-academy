@@ -1,3 +1,5 @@
+import { SubmitButton } from "@/components/ui/SubmitButton";
+
 import { LogOut } from "lucide-react";
 import Link from "next/link";
 
@@ -16,9 +18,9 @@ export default async function PanelLayout({ children }: { children: React.ReactN
             <Link href="/" className="text-sm font-medium text-accent underline focus-visible:outline-accent">Lihat situs PLA</Link>
           </div>
           <form action={logoutAdmin} className="lg:mt-4">
-            <button className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-white/35 px-3 text-sm font-semibold focus-visible:outline-accent">
+            <SubmitButton className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-white/35 px-3 text-sm font-semibold enabled:hover:bg-white/10 focus-visible:outline-accent">
               <LogOut aria-hidden="true" className="size-4" /> Keluar
-            </button>
+            </SubmitButton>
           </form>
         </div>
         <AdminNav />

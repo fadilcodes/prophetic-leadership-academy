@@ -1,3 +1,6 @@
+import { FilterForm } from "@/components/ui/FilterForm";
+import { SubmitButton } from "@/components/ui/SubmitButton";
+
 import { AdminTable, Pager, SelectField, secondaryButton, tableRow } from "@/components/admin/AdminUI";
 import { TrackingDialog } from "@/components/admin/TrackingDialog";
 import { requireAdmin } from "@/lib/admin/auth";
@@ -23,11 +26,11 @@ export default async function OrdersAdmin({ searchParams }: PageProps<"/admin/pe
   return (
     <>
       <h1 className="text-4xl">Pesanan & Pengiriman</h1>
-      <form method="get" className="my-5 flex flex-wrap items-end gap-3">
+      <FilterForm key={JSON.stringify([payment, fulfillment])} action="/admin/pesanan" className="my-5 flex flex-wrap items-end gap-3">
         <SelectField name="bayar" label="Status bayar" value={payment} options={statusOptions(orderPaymentStatuses)} />
         <SelectField name="kirim" label="Status pengiriman" value={fulfillment} options={statusOptions(fulfillmentStatuses)} />
-        <button className={secondaryButton}>Terapkan</button>
-      </form>
+        <SubmitButton className={secondaryButton}>Terapkan</SubmitButton>
+      </FilterForm>
       <AdminTable columns={["Pesanan", "Penerima", "Status", "Pengiriman"]} empty={!data.length}>
         {data.map((order) => (
           <tr key={order.id} className={tableRow}>

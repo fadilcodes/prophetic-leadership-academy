@@ -125,7 +125,7 @@ export default async function ProgramPage({ params }: PageProps<"/program/[slug]
               <p className="font-bold text-primary">{price}</p>
               <p className="text-xs text-muted-foreground">Sisa {remaining} tempat</p>
             </div>
-            <a href="#pendaftaran" className="inline-flex min-h-11 items-center rounded-lg bg-accent px-5 text-sm font-bold text-accent-foreground">
+            <a href="#pendaftaran" className="inline-flex min-h-11 items-center rounded-lg bg-accent px-5 text-sm font-bold text-accent-foreground hover:bg-accent-hover">
               Daftar sekarang
             </a>
           </div>

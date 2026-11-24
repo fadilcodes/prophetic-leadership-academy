@@ -40,7 +40,7 @@ export default async function OrderStatusPage({ searchParams }: PageProps<"/chec
         <div><dt className="font-bold text-primary">Total</dt><dd className="mt-1">{formatRupiah(order.total_amount)}</dd></div>
       </dl>
       <div className="mt-5 flex flex-wrap justify-center gap-3">
-        {pending && <a href={`?order_id=${orderId}`} className="inline-flex min-h-11 items-center rounded-lg bg-accent px-4 text-sm font-bold text-accent-foreground">Perbarui status</a>}
+        {pending && <a href={`?order_id=${orderId}`} className="inline-flex min-h-11 items-center rounded-lg bg-accent px-4 text-sm font-bold text-accent-foreground hover:bg-accent-hover">Perbarui status</a>}
         <Link href={order.pay_status === "EXPIRED" ? "/checkout" : "/merchandise"}
           className="inline-flex min-h-11 items-center rounded-lg border px-4 text-sm font-bold text-primary">
           {order.pay_status === "EXPIRED" ? "Kembali ke checkout" : "Lihat merchandise"}

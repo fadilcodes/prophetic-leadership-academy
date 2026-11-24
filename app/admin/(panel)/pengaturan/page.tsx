@@ -1,3 +1,5 @@
+import { SubmitButton } from "@/components/ui/SubmitButton";
+
 import Image from "next/image";
 
 import { saveSettings } from "./actions";
@@ -47,7 +49,7 @@ export default async function SettingsAdmin({ searchParams }: PageProps<"/admin/
           </label>
           <Field name="whatsapp" label="Nomor WhatsApp resmi" type="tel" value={settingText(settings.get("whatsapp_admin"))} maxLength={30} />
         </section>
-        <div><button className={primaryButton}>Simpan pengaturan</button></div>
+        <div><SubmitButton className={primaryButton}>Simpan pengaturan</SubmitButton></div>
       </form>
     </>
   );

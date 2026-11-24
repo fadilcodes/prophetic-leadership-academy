@@ -12,7 +12,7 @@ export function CartDrawer({ open, onOpenChange }: { open?: boolean; onOpenChang
   const { items, setQuantity } = useCart();
   const total = items.reduce((sum, item) => sum + item.qty * item.price, 0);
   const qty = items.reduce((sum, item) => sum + item.qty, 0);
-  const quantityButton = "grid size-11 place-items-center rounded-lg hover:bg-secondary disabled:opacity-40";
+  const quantityButton = "grid size-11 place-items-center rounded-lg enabled:hover:bg-secondary disabled:opacity-40";
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -54,7 +54,7 @@ export function CartDrawer({ open, onOpenChange }: { open?: boolean; onOpenChang
             <div className="mt-auto border-t pt-5">
               <div className="flex justify-between gap-4 font-bold text-primary"><span>Subtotal</span><span>{formatRupiah(total)}</span></div>
               <SheetClose asChild>
-                <Link href="/checkout" className="mt-4 flex min-h-11 items-center justify-center rounded-lg bg-accent px-4 font-bold text-accent-foreground">
+                <Link href="/checkout" className="mt-4 flex min-h-11 items-center justify-center rounded-lg bg-accent px-4 font-bold text-accent-foreground hover:bg-accent-hover">
                   Lanjut ke checkout
                 </Link>
               </SheetClose>

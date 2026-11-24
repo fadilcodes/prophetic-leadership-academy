@@ -1,3 +1,6 @@
+import { FilterForm } from "@/components/ui/FilterForm";
+import { SubmitButton } from "@/components/ui/SubmitButton";
+
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -21,7 +24,7 @@ export default async function ProgramsPage({ searchParams }: PageProps<"/program
   return (
     <>
       <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl">Katalog Program</h1>
-      <form action="/program" method="get" aria-label="Filter program"
+      <FilterForm key={JSON.stringify([category, mode, status])} action="/program" aria-label="Filter program"
         className="mt-8 grid gap-4 rounded-2xl border bg-card p-4 sm:grid-cols-3 sm:p-6 lg:grid-cols-[1fr_1fr_1fr_auto] lg:items-end">
         <label className="grid gap-2 text-sm font-bold text-primary">
           Kategori
@@ -45,16 +48,16 @@ export default async function ProgramsPage({ searchParams }: PageProps<"/program
           </select>
         </label>
         <div className="flex flex-wrap items-center gap-3 sm:col-span-3 lg:col-span-1">
-          <button type="submit" className="min-h-11 rounded-lg bg-primary px-5 text-sm font-bold text-primary-foreground">
+          <SubmitButton className="min-h-11 rounded-lg bg-primary px-5 text-sm font-bold text-primary-foreground enabled:hover:bg-primary-hover">
             Terapkan filter
-          </button>
+          </SubmitButton>
           {(category || mode || status) && (
             <Link href="/program" className="inline-flex min-h-11 items-center px-2 text-sm font-bold text-primary underline">
               Reset
             </Link>
           )}
         </div>
-      </form>
+      </FilterForm>
       <ProgramCards {...programs} showCatalogDetails />
     </>
   );

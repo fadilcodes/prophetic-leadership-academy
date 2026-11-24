@@ -1,11 +1,13 @@
+import { SubmitButton } from "@/components/ui/SubmitButton";
+
 import Link from "next/link";
 import type { ReactNode } from "react";
 
 import type { AdminQuery } from "@/lib/admin/forms";
 
 export const inputClass = "min-h-11 w-full rounded-lg border border-input bg-card px-3 py-2 text-sm font-normal text-foreground";
-export const primaryButton = "inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-4 text-sm font-bold text-primary-foreground hover:brightness-110";
-export const secondaryButton = "inline-flex min-h-11 items-center justify-center rounded-lg border bg-card px-3 text-sm font-bold text-primary hover:bg-secondary";
+export const primaryButton = "inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-4 text-sm font-bold text-primary-foreground hover:not-disabled:bg-primary-hover";
+export const secondaryButton = "inline-flex min-h-11 items-center justify-center rounded-lg border bg-card px-3 text-sm font-bold text-primary hover:not-disabled:bg-secondary";
 export const labelClass = "grid gap-1.5 text-sm font-bold text-primary";
 export const tableRow = "border-t align-top [&_td]:px-4 [&_td]:py-3";
 
@@ -51,7 +53,7 @@ export function Editor({ title, action, id, base, children }: {
         {id && <input type="hidden" name="id" value={id} />}
         {children}
         <div className="flex flex-wrap gap-2">
-          <button className={primaryButton}>Simpan</button>
+          <SubmitButton className={primaryButton}>Simpan</SubmitButton>
           {id && <Link href={base} className={secondaryButton}>Batal</Link>}
         </div>
       </form>

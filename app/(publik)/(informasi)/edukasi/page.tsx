@@ -1,3 +1,6 @@
+import { FilterForm } from "@/components/ui/FilterForm";
+import { SubmitButton } from "@/components/ui/SubmitButton";
+
 import { Search } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -38,7 +41,7 @@ export default async function EducationPage({ searchParams }: PageProps<"/edukas
         </p>
       </div>
       <div className="mt-8 flex flex-col gap-5 rounded-2xl border bg-card p-4 sm:p-6">
-        <form action="/edukasi" method="get" role="search" className="flex flex-wrap gap-2">
+        <FilterForm key={JSON.stringify([category, title])} action="/edukasi" role="search" className="flex flex-wrap gap-2">
           {category && <input type="hidden" name="kategori" value={category} />}
           <label htmlFor="article-search" className="sr-only">Cari judul artikel</label>
           <div className="relative min-w-40 flex-1">
@@ -54,8 +57,8 @@ export default async function EducationPage({ searchParams }: PageProps<"/edukas
               className="min-h-12 w-full rounded-lg border bg-background py-2 pr-3 pl-10"
             />
           </div>
-          <button className="min-h-12 rounded-lg bg-accent px-5 text-sm font-bold text-primary">Cari</button>
-        </form>
+          <SubmitButton className="min-h-12 rounded-lg bg-accent px-5 text-sm font-bold text-accent-foreground enabled:hover:bg-accent-hover">Cari</SubmitButton>
+        </FilterForm>
         <nav aria-label="Kategori artikel" className="flex flex-wrap gap-2">
           {[{ name: "Semua kategori", slug: "" }, ...result.categories].map(({ name, slug }) => (
             <Link

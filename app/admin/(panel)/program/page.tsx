@@ -1,3 +1,5 @@
+import { SubmitButton } from "@/components/ui/SubmitButton";
+
 import Link from "next/link";
 
 import { deleteContent, saveProgram, saveProgramAccess } from "../actions";
@@ -75,7 +77,7 @@ export default async function ProgramsAdmin({ searchParams }: PageProps<"/admin/
             <form key={item.id} action={saveProgramAccess} className="grid gap-4">
               <input type="hidden" name="id" value={item.id} />
               <Field name="details" label="Tautan atau petunjuk untuk email konfirmasi" value={access?.data?.details} area maxLength={20_000} />
-              <button className={primaryButton}>Simpan akses</button>
+              <SubmitButton className={primaryButton}>Simpan akses</SubmitButton>
             </form>
           </section>}
         </div>

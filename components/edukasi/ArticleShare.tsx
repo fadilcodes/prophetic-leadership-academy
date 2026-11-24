@@ -26,14 +26,14 @@ export function ArticleShare({ title, path, canonical }: { title: string; path: 
         <button
           type="button"
           onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(`${title}\n${getUrl()}`)}`, "_blank", "noopener,noreferrer")}
-          className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-bold text-primary-foreground"
+          className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-bold text-primary-foreground hover:bg-primary-hover"
         >
           <MessageCircle aria-hidden="true" className="size-4" /> Bagikan via WhatsApp
         </button>
         <button
           type="button"
           onClick={copyLink}
-          className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-accent px-4 text-sm font-bold text-primary"
+          className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-accent px-4 text-sm font-bold text-primary hover:bg-accent/10"
         >
           <Copy aria-hidden="true" className="size-4" /> Salin tautan
         </button>

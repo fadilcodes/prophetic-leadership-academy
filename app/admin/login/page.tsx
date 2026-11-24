@@ -1,3 +1,5 @@
+import { SubmitButton } from "@/components/ui/SubmitButton";
+
 import { LockKeyhole } from "lucide-react";
 import Link from "next/link";
 
@@ -23,7 +25,7 @@ export default async function AdminLogin({ searchParams }: PageProps<"/admin/log
           {error && <p role="alert" className="text-sm text-destructive">
             {error === "akses" ? "Akun ini tidak memiliki akses admin." : "Email atau kata sandi tidak valid."}
           </p>}
-          <button className="min-h-11 rounded-lg bg-accent hover:bg-[#b69449] px-4 font-bold text-accent-foreground cursor-pointer ">Masuk</button>
+          <SubmitButton className="min-h-11 rounded-lg bg-accent enabled:hover:bg-accent-hover px-4 font-bold text-accent-foreground">Masuk</SubmitButton>
           <Link href="/" className="min-h-11 content-center text-center text-sm font-semibold text-primary underline">Kembali ke situs PLA</Link>
         </form>
       </div>
