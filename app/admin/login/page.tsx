@@ -2,6 +2,7 @@ import { LockKeyhole } from "lucide-react";
 import Link from "next/link";
 
 import { loginAdmin } from "@/app/admin/auth-actions";
+import { PasswordField } from "@/components/admin/PasswordField";
 
 export default async function AdminLogin({ searchParams }: PageProps<"/admin/login">) {
   const { error } = await searchParams;
@@ -18,14 +19,11 @@ export default async function AdminLogin({ searchParams }: PageProps<"/admin/log
             Email
             <input name="email" type="email" autoComplete="username" required className="min-h-11 rounded-lg border border-input px-3 font-normal" />
           </label>
-          <label className="grid gap-2 text-sm font-bold text-primary">
-            Kata sandi
-            <input name="password" type="password" autoComplete="current-password" required className="min-h-11 rounded-lg border border-input px-3 font-normal" />
-          </label>
+          <PasswordField />
           {error && <p role="alert" className="text-sm text-destructive">
             {error === "akses" ? "Akun ini tidak memiliki akses admin." : "Email atau kata sandi tidak valid."}
           </p>}
-          <button className="min-h-11 rounded-lg bg-accent px-4 font-bold text-accent-foreground">Masuk</button>
+          <button className="min-h-11 rounded-lg bg-accent hover:bg-[#b69449] px-4 font-bold text-accent-foreground cursor-pointer ">Masuk</button>
           <Link href="/" className="min-h-11 content-center text-center text-sm font-semibold text-primary underline">Kembali ke situs PLA</Link>
         </form>
       </div>
